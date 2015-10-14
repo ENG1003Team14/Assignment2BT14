@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+   <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+   <title>Instructions Page</title>
+   <style>
+      #mapdiv {
+                 margin: auto;
+                 padding: 0;
+                 width: 500px;
+                 height: 500px;
+                 }
+       
+       body{
+                 background-color: #9CFFE8;
+                 text-align: left;
+                 margin: auto;
+                 color: black;
+                 font-family: cursive;
+                 }
+       
+       span.mdl-layout-title{
+                 font-family:Impact;
+                 font-size: 50px;
+                 font-weight: heavy;
+                 }
+        
+       button   {
+           margin: right;
+           float: right;
+                }         
+   </style>
+
+   <!-- HEADER -->
+   <!-- Always shows a header, even in smaller screens. -->
+   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+         <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">DO IT!</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <!-- Right aligned menu below button -->
+            <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+               <i class="material-icons">more_vert</i>
+            </button>
+
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+               <li class="mdl-menu__item">Routes</li>
+               <li class="mdl-menu__item">Achievements</li>
+               <li class="mdl-menu__item">Disabled Actions</li>
+               <li class="mdl-menu__item">Settings</li>
+            </ul>
+         </div>
+      </header>
+
+      <div class="mdl-layout__drawer">
+         <span class="mdl-layout-title">DO IT!</span>
+         <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+         </nav>
+      </div>
+      <main class="mdl-layout__content">
+         <div class="page-content">
+            <!-- Your content goes here -->
+            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+            <body>
+       
+       <h1 style = "font-size: 2.5em"> How To Use This Awesome App:</h1>
+       <p style = "font-size: 2em"> To record a run </p>
+       <p style = "font-size: 1.3em"> Step 1: Click on the "START" button to begin recording your run.</p>
+       <p style = "font-size: 1.2em"> Step 2: Place your device anywhere on your torso for the best and most accurate reading.</p>
+       <p style = "font-size: 1.2em"> Step 3: Start running! =)</p>
+       <p style = "font-size: 2em"> To save a run </p>
+       <p style = "font-size: 1.3em"> Step 1: Click on the "STOP" button to stop recording your run.</p>
+       <p style = "font-size: 1.2em"> Step 2: Click on the SAVE button to save your route.</p>
+       <p style = "font-size: 1.2em"> Step 3: Enter a name for your route. Your run is now saved!</p>
+       <p style = "font-size: 2em"> To view a run </p>
+       <p style = "font-size: 1.3em"> Step 1: In your record page, tap on the three dots icon on the top right of your screen.</p>
+       <p style = "font-size: 1.2em"> Step 2: A drop down menu would apprear, select "Routes".</p>
+       <p style = "font-size: 1.2em"> Step 3: You would be brought to a page with a map and some details about a route. Tap on the three dots icon on the top right of your screen.</p>
+       <p style = "font-size: 1.2em"> Step 4: A drop down menu would apprear with the name(s) of the routes that you have saved, select your desired route.</p>
+   </body>
+         </div>
+      </main>
+   </div>
+
+   </header>
+   
+   
+   
+</head>
+
+</html>
