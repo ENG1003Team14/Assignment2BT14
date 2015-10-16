@@ -1,6 +1,12 @@
 LIST OF MEMBERS FOR TEAM 14
  
 Tan Ca Rol
+I love orange! =p
+ 
+Role in project:team leader
+ 
+Preferred branch of engineering: chemical
+
  
 Lim Pei Dee
 19 years young. Loves pizza.
@@ -8,3 +14,6 @@ Role in project: Programmer
 Preferred branch of engineering: Chemical
  
 Szetoo Weiqi 
+Likes chocolate and cats
+Role in project: member?
+Preferred branch of engineering: chemical
