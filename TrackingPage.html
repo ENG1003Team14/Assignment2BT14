@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+  <title>Record Page</title>
+  <style>
+    #mapdiv {
+                 margin: auto;
+                 padding: 0;
+                 width: 500px;
+                 height: 500px;
+                 }
+       
+       body{
+                 background-color: #9CFFE8;
+                 text-align: center;
+                 margin: auto;
+                 }
+       
+       span.mdl-layout-title{
+                 font-family:Impact;
+                 font-size: 50px;
+                 font-weight: heavy;
+                 }
+  </style>
+
+  <script language="JavaScript" type="text/javascript">
+    <!--
+      var sec = 0;
+      var min = 0;
+      var hour = 0;
+      function stopwatch(text) {
+         sec++;
+        if (sec == 60) {
+         sec = 0;
+         min = min + 1; }
+        else {
+         min = min; }
+        if (min == 60) {
+         min = 0; 
+         hour += 1; }
+      
+      if (sec<=9) { sec = "0" + sec; }
+         document.clock.stwa.value = ((hour<=9) ? "0"+hour : hour) + " : " + ((min<=9) ? "0" + min : min) + " : " + sec;
+      
+        if (text == "Start") { document.clock.theButton.value = "Stop "; }
+        if (text == "Stop ") { document.clock.theButton.value = "Start"; }
+      
+        if (document.clock.theButton.value == "Start") {
+         window.clearTimeout(SD);
+         return true; }
+      SD=window.setTimeout("stopwatch();", 1000);
+      }
+      
+      function resetIt() {
+        sec = -1;
+        min = 0;
+        hour = 0;
+        if (document.clock.theButton.value == "Stop ") {
+        document.clock.theButton.value = "Start"; }
+        window.clearTimeout(SD);
+       }
+      // -->
+  </script>
+
+  <!-- HEADER -->
+  <!-- Always shows a header, even in smaller screens. -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">DO IT!</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <!-- Right aligned menu below button -->
+        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">more_vert</i>
+        </button>
+
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+          <li class="mdl-menu__item" onclick="window.location='View page.html'">Routes</li>
+          <li class="mdl-menu__item">Achievements</li>
+          <li class="mdl-menu__item" onclick="window.location='Instructions page.html'">Instructions</li>
+          <li class="mdl-menu__item">Settings</li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">DO IT!</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="Launch page.html">Home page</a>
+        <a class="mdl-navigation__link" href="Record page.html">Record page</a>
+        <a class="mdl-navigation__link" href="View page.html">View page</a>
+
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <!-- Your content goes here -->
+
+      </div>
+    </main>
+  </div>
+
+  </header>
+
+
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+  <script>
+    var watchId = null;
+         	function geoloc() {
+         	if (navigator.geolocation) {
+         		var optn = {
+         				enableHighAccuracy : true,
+         				timeout : 40000,
+         				maximumAge : 0,
+         frequency: 3000
+         		};
+         	watchId = navigator.geolocation.watchPosition(showPosition, showError, optn);
+         	} else {
+         			alert('Geolocation is not supported in your browser');
+         	}
+         	}
+         
+         function showPosition(position) {
+    
+         		var googlePos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    
+         		var mapOptions = {
+         			zoom : 17,
+         			center : googlePos,
+         			mapTypeId : google.maps.MapTypeId.ROADMAP
+         		};
+         		var mapObj = document.getElementById('mapdiv');
+         		var googleMap = new google.maps.Map(mapObj, mapOptions);
+         		var markerOpt = {
+         			map : googleMap,
+         			position : googlePos
+         };
+         		var googleMarker = new google.maps.Marker(markerOpt);
+         		var geocoder = new google.maps.Geocoder();
+         		geocoder.geocode({
+         			'latLng' : googlePos
+         			}, function(results, status) {
+         				if (status == google.maps.GeocoderStatus.OK) {
+         				if (results[1]) {
+         					var popOpts = {
+         						content : results[1].formatted_address,
+         						position : googlePos
+         					};
+         				var popup = new google.maps.InfoWindow(popOpts);
+         				google.maps.event.addListener(googleMarker, 'click', function() {
+         				popup.open(googleMap);
+         			});
+         				} else {
+         					alert('No results found');
+         				}
+         				} else {
+         					alert('Geocoder failed due to: ' + status);
+         				}
+         			});
+         			}
+         
+         			function stopWatch() {
+         				if (watchId) {
+         					navigator.geolocation.clearWatch(watchId);
+         					watchId = null;
+         
+         				}
+         			}
+         
+         		function showError(error) {
+         		var err = document.getElementById('mapdiv');
+         		switch(error.code) {
+         		case error.PERMISSION_DENIED:
+         		err.innerHTML = "User denied the request for Geolocation."
+         		break;
+         		case error.POSITION_UNAVAILABLE:
+         		err.innerHTML = "Location information is unavailable."
+         		break;
+         		case error.TIMEOUT:
+         		err.innerHTML = "The request to get user location timed out."
+         		break;
+         		case error.UNKNOWN_ERROR:
+         		err.innerHTML = "An unknown error occurred."
+         		break;
+         		}
+         		}
+     
+     
+         function startTracking(){
+    
+         var track_id = '';      // Name/ID of the exercise
+         var watchId = null;    // ID of the geolocation
+         var tracking_data = []; // Array containing GPS position objects
+    
+          tracking_data.push(position)
+    
+         	// Set the initial Lat and Long of the Google Map
+         var myLatLng = new google.maps.LatLng(data[0].coords.latitude, data[0].coords.longitude);
+
+         // Create the Google Map, set options
+         var map = new google.maps.Map(document.getElementById("mapdiv"), mapOptions);
+
+
+         var trackCoords = [];
+         // Add each GPS entry to an array
+         for(i=0; i < data.length; i++) {
+            trackCoords.push(new google.maps.LatLng(data[i].coords.latitude, data[i].coords.longitude));
+         }
+
+        // Plot the GPS entries as a line on the Google Map
+        var trackPath = new google.maps.Polyline( {
+          path: trackCoords,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        } );
+
+        // Apply the line to the map
+        trackPath.setMap(map);
+             }
+                                
+  </script>
+
+</head>
+
+<body onload="geoloc()">
+  <p id='mapdiv'></p>
+  
+  <table bgcolor="#c0c0c0" align="center" border="0" width="140" cellspacing="0">
+    <tr>
+      <td align="center">
+        <font face="verdana, arial, helvetica, sans-serif" size="2">
+       <b>STOPWATCH</b></font>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+      
+        <form name="clock">
+          <input type="text" size="12" name="stwa" value="00 : 00 : 00" style="text-align:center" />
+          <br />
+          <input type="button" name="theButton" onClick="stopwatch(this.value);" value="Start" />
+          <input type="button" value="Reset" onClick="resetIt();reset();" />
+        </form>
+      </td>
+    </tr>
+  </table>
+
+
+  <br>
+
+  <button onclick="stopWatch()">
+    Stop
+  </button>
+</body>
+
+</html>

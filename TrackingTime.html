@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+  
+<button onclick="startCounting()">Start count!</button>
+<input type="text" id="outputText" value = "00 : 00 : 00">
+<button onclick="stopCounting()">Stop count!</button>
+<button onclick="resetCounting()">Reset count!</button>
+<script>
+  
+var sec = 00; var min = 00; var hr = 00;
+var timerOn;
+var k;
+  
+function timedCounting(){
+    if(sec === 60){
+        sec = 00;
+        min = min + 1;}
+
+    else{ min = min;}
+
+    if(min === 60){
+        min = 00;
+        hr+=1;
+    }
+                                                                     
+    document.getElementById("outputText").value = hr + " : " + min + " : " +sec;
+    sec = sec + 1;
+    k = setTimeout(function(){timedCounting()}, 1000);
+  }
+  
+  function startCounting() {
+    if (!timerOn) {
+        timerOn = 1;
+        timedCounting();
+    }
+  }
+
+function stopCounting() {
+    clearTimeout(k);
+    timerOn = 0;
+}
+
+function resetCounting(){stopCounting();
+    sec = 0; min = 0; hr=0;
+    document.getElementById("outputText").value = hr + " : " + min + " : " +sec;
+  }  
+</script>
+
+</body>
+</html>
